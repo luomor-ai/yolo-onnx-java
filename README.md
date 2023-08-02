@@ -19,3 +19,5 @@
  - **Concatoutput_dim_0** ：变量，表示当前图像中预测目标的数量，
  - **7**：表示每个目标的七个参数：`batch_id，x0，y0，x1，y1，cls_id，score`
 ![输入图片说明](https://foruda.gitee.com/images/1690944320288742664/eb1cb2d9_1451768.png "屏幕截图")
+
+## 暂不支持返回三个数组参数的模型
