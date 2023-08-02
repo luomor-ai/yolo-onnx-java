@@ -1,4 +1,4 @@
-package cn.halashuo.config;
+package cn.ck.config;
 
 import java.util.Random;
 import java.util.ArrayList;

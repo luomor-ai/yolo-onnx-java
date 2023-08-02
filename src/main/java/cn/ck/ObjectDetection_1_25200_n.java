@@ -1,12 +1,12 @@
-package cn.halashuo;
+package cn.ck;
 
 import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OrtEnvironment;
 import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
-import cn.halashuo.config.ODConfig;
-import cn.halashuo.domain.Detection;
-import cn.halashuo.utils.Letterbox;
+import cn.ck.config.ODConfig;
+import cn.ck.domain.Detection;
+import cn.ck.utils.Letterbox;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;

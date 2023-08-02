@@ -1,6 +1,6 @@
-package cn.halashuo.utils;
+package cn.ck.utils;
 
-import cn.halashuo.domain.Detection;
+import cn.ck.domain.Detection;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 

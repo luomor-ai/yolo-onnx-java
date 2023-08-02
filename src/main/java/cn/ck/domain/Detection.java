@@ -1,4 +1,4 @@
-package cn.halashuo.domain;
+package cn.ck.domain;
 
 public class Detection{
 

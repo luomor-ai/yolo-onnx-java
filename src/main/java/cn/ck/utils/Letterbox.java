@@ -1,4 +1,4 @@
-package cn.halashuo.utils;
+package cn.ck.utils;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
