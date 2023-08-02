@@ -98,11 +98,11 @@ public class ImageUtil {
 
             float[] bbox = detection.getBbox();
             Scalar color = new Scalar(249, 218, 60);
-            Imgproc.rectangle(img,                    //Matrix obj of the image
-                    new Point(bbox[0], bbox[1]),        //p1
-                    new Point(bbox[2], bbox[3]),       //p2
-                    color,     //Scalar object for color
-                    2                        //Thickness of the line
+            Imgproc.rectangle(img,
+                    new Point(bbox[0], bbox[1]),
+                    new Point(bbox[2], bbox[3]),
+                    color,
+                    2
             );
             Imgproc.putText(
                     img,
