@@ -4,6 +4,7 @@
 3.  目前代码仅支持`window`s系统，`linux`需要替换`opencv`的`dll`文件为`so`文件
 4.  可以封装为HTTP controller API接口
 5.  支持`yolov7` 和 `yolov5`
+6.  替换`model`目录下的onnx模型文件，可以识别检测任何物体(烟火，跌倒，抽烟，安全帽，口罩，人，等等)，有模型即可
 
 ---
 
