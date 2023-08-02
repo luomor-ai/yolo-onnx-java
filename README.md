@@ -1,4 +1,4 @@
-## 先star
+## 先下载运行看效果再研究代码，别忘记点star
 1.  下载代码可直接运行主文件：`ObjectDetection_1_25200_n.java` 或者 `ObjectDetection_n_7.java` 都可以直接运行
 2.  两个可以运行的主文件是为了支持不用网络结构的模型，即使是`onnx`模型，输出的结果参数也不一样，支持以下两种结构
 3.  目前代码仅支持`window`s系统，`linux`需要替换`opencv`的`dll`文件为`so`文件
