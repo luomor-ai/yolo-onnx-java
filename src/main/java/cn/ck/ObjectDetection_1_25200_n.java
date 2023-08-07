@@ -89,7 +89,6 @@ public class ObjectDetection_1_25200_n {
             int thickness = minDwDh/ODConfig.lineThicknessRatio;
             double fontSize = minDwDh/ODConfig.fontSizeRatio;
             int fontFace = Imgproc.FONT_HERSHEY_SIMPLEX;
-            Scalar fontColor = new Scalar(255, 255, 255);
             long start_time = System.currentTimeMillis();
             // 更改 image 尺寸
             Letterbox letterbox = new Letterbox();
@@ -166,7 +165,7 @@ public class ObjectDetection_1_25200_n {
                 // 框上写文字
                 Point boxNameLoc = new Point((bbox[0]-dw)/ratio, (bbox[1]-dh)/ratio-3);
 
-                Imgproc.putText(img, detection.getLabel(), boxNameLoc, fontFace, fontSize, fontColor, thickness);
+                Imgproc.putText(img, detection.getLabel(), boxNameLoc, fontFace, fontSize, color, thickness);
             }
             System.out.printf("time：%d ms.", (System.currentTimeMillis() - start_time));
             System.out.println();

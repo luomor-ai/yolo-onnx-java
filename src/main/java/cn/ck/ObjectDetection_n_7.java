@@ -57,6 +57,7 @@ public class ObjectDetection_n_7 {
         // 加载标签及颜色
         ODConfig odConfig = new ODConfig();
         Map<String, String> map = getImagePathMap(imagePath);
+
         for(String fileName : map.keySet()){
             String imageFilePath = map.get(fileName);
             System.out.println(imageFilePath);
@@ -71,7 +72,6 @@ public class ObjectDetection_n_7 {
             int thickness = minDwDh/ODConfig.lineThicknessRatio;
             double fontSize = minDwDh/ODConfig.fontSizeRatio;
             int fontFace = Imgproc.FONT_HERSHEY_SIMPLEX;
-            Scalar fontColor = new Scalar(255, 255, 255);
 
             // 上面代码都是初始化后静态的，不用写在循环内，所以不计算时间
             long start_time = System.currentTimeMillis();
@@ -126,7 +126,7 @@ public class ObjectDetection_n_7 {
                 String boxName = odConfig.getName(odResult.getClsId());
                 Point boxNameLoc = new Point((odResult.getX0()-dw)/ratio, (odResult.getY0()-dh)/ratio-3);
 
-                Imgproc.putText(img, boxName, boxNameLoc, fontFace, fontSize, fontColor, thickness);
+                Imgproc.putText(img, boxName, boxNameLoc, fontFace, fontSize, color, thickness);
             });
             System.out.printf("time：%d ms.", (System.currentTimeMillis() - start_time));
             System.out.println();
@@ -134,9 +134,12 @@ public class ObjectDetection_n_7 {
             // 保存图像到同级目录
             // Imgcodecs.imwrite(ODConfig.savePicPath, img);
             // 弹窗展示图像
-            HighGui.imshow("Display Image", img);
+
+            HighGui.imshow("result", img);
+
             // 按任意按键关闭弹窗画面，结束程序
             HighGui.waitKey();
+
         }
         HighGui.destroyAllWindows();
         System.exit(0);

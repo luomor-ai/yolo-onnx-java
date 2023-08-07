@@ -13,7 +13,7 @@ public final class ODConfig {
     public static final Integer lineThicknessRatio = 333;
     public static final Double fontSizeRatio = 1145.14;
 
-/*    private static final List<String> names = new ArrayList<>(Arrays.asList(
+    private static final List<String> default_names = new ArrayList<>(Arrays.asList(
             "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train",
             "truck", "boat", "traffic light", "fire hydrant", "stop sign", "parking meter",
             "bench", "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear",
@@ -25,7 +25,7 @@ public final class ODConfig {
             "cake", "chair", "couch", "potted plant", "bed", "dining table", "toilet",
             "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "microwave",
             "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
-            "teddy bear", "hair drier", "toothbrush"));*/
+            "teddy bear", "hair drier", "toothbrush"));
 
 
     private static final List<String> names = new ArrayList<>(Arrays.asList(
@@ -35,7 +35,7 @@ public final class ODConfig {
 
     public ODConfig() {
         this.colors = new HashMap<>();
-        names.forEach(name->{
+        default_names.forEach(name->{
             Random random = new Random();
             double[] color = {random.nextDouble()*256, random.nextDouble()*256, random.nextDouble()*256};
             colors.put(name, color);
@@ -48,5 +48,10 @@ public final class ODConfig {
 
     public double[] getColor(int clsId) {
         return colors.get(getName(clsId));
+    }
+
+
+    public double[] getOtherColor(int clsId) {
+        return colors.get(default_names.get(clsId));
     }
 }
