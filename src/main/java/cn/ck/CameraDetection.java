@@ -94,7 +94,7 @@ public class CameraDetection {
 
         Mat img = new Mat();
 
-        int detect_skip = 2;
+        int detect_skip = 3;
 
         // 跳帧计数
         int detect_skip_index = 1;
