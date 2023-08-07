@@ -22,6 +22,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 摄像头识别，仅支持运行在有摄像头的电脑上
+ */
+
 public class CameraDetection {
 
     static {
