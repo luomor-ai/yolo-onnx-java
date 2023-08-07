@@ -28,13 +28,11 @@ import java.util.Map;
 
 public class CameraDetection {
 
-    static {
-        // 加载opencv动态库，仅能在windows中运行，如果在linux中运行，需要加载linux动态库
-        URL url = ClassLoader.getSystemResource("lib/opencv_java460.dll");
-        System.load(url.getPath());
-    }
 
     public static void main(String[] args) throws OrtException {
+
+        System.load(ClassLoader.getSystemResource("lib/opencv_java460.dll").getPath());
+        System.load(ClassLoader.getSystemResource("lib/opencv_videoio_ffmpeg460_64.dll").getPath());
 
         String model_path = "src\\main\\resources\\model\\yolov7-tiny.onnx";
 
@@ -75,9 +73,10 @@ public class CameraDetection {
         ODConfig odConfig = new ODConfig();
         VideoCapture camera = new VideoCapture();
 
-        // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test"),camera.open("rtsp://192.168.1.100/live/test")
+        // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test"),
+        // camera.open("rtsp://192.168.1.100/live/test")
         // 也可以静态视频文件：camera.open("c://abc/123.mp4")
-        camera.open(0);
+        camera.open("rtsp://admin:a123456789@192.168.1.154:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
 
 
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频
@@ -179,12 +178,14 @@ public class CameraDetection {
             HighGui.imshow("result", img);
 
             // 按任意按键关闭弹窗画面，结束程序
-            HighGui.waitKey(1);
-
+            if(HighGui.waitKey(1) != -1){
+                break;
+            }
 
         }
 
         HighGui.destroyAllWindows();
+        camera.release();
         System.exit(0);
 
 
