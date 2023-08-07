@@ -56,7 +56,7 @@ public class CameraDetection {
         OrtEnvironment environment = OrtEnvironment.getEnvironment();
         OrtSession.SessionOptions sessionOptions = new OrtSession.SessionOptions();
 
-        // 使用gpu,需要本机按钻过cuda，并修改pom.xml
+        // 使用gpu,需要本机按钻过cuda，并修改pom.xml，不安装也能运行本程序
         // sessionOptions.addCUDA(0);
 
         OrtSession session = environment.createSession(model_path, sessionOptions);
