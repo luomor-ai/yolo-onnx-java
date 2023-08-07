@@ -106,6 +106,9 @@ public class CameraDetection {
         double ratio = 0.0d;
         double dw  = 0.0d;
         double dh = 0.0d;
+        int rows = 0;
+        int cols = 0;
+        int channels = 0;
 
         while (camera.read(img)) {
 
@@ -122,12 +125,9 @@ public class CameraDetection {
                 ratio = letterbox.getRatio();
                 dw = letterbox.getDw();
                 dh = letterbox.getDh();
-                int rows = letterbox.getHeight();
-                int cols = letterbox.getWidth();
-                int channels = image.channels();
-
-
-
+                rows = letterbox.getHeight();
+                cols = letterbox.getWidth();
+                channels = image.channels();
 
                 // 将Mat对象的像素值赋值给Float[]对象
                 float[] pixels = new float[channels * rows * cols];
@@ -148,6 +148,7 @@ public class CameraDetection {
                 stringOnnxTensorHashMap.put(session.getInputInfo().keySet().iterator().next(), tensor);
 
                 // 运行推理
+                // 模型推理本质是矩阵运算，而GPU是专门用于矩阵运算，占用率低，如果使用cpu也可以运行，可能占用率100%属于正常现象，不必纠结。
                 OrtSession.Result output = session.run(stringOnnxTensorHashMap);
 
                 // 得到结果,缓存结果
