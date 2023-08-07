@@ -11,16 +11,12 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.highgui.HighGui;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
-import java.net.URL;
 import java.nio.FloatBuffer;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 摄像头识别，仅支持运行在有摄像头的电脑上
@@ -68,7 +64,6 @@ public class CameraDetection {
             }
         });
 
-
         // 加载标签及颜色
         ODConfig odConfig = new ODConfig();
         VideoCapture camera = new VideoCapture();
@@ -78,12 +73,10 @@ public class CameraDetection {
         // 也可以静态视频文件：camera.open("c://abc/123.mp4")
         camera.open(0);  //获取电脑上第0个摄像头
 
-
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频
         if (!camera.isOpened()) {
             System.err.println("打开视频流失败");
         }
-
 
         // 在这里先定义下框的粗细、字的大小、字的类型、字的颜色(按比例设置大小粗细比较好一些)
         int minDwDh = Math.min((int)camera.get(Videoio.CAP_PROP_FRAME_WIDTH), (int)camera.get(Videoio.CAP_PROP_FRAME_HEIGHT));
@@ -188,9 +181,5 @@ public class CameraDetection {
         camera.release();
         System.exit(0);
 
-
     }
-
-
-
 }
