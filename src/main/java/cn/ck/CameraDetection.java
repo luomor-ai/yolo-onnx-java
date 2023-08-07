@@ -78,6 +78,8 @@ public class CameraDetection {
         // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test""),camera.open("rtsp://192.168.1.100/live/test"")
         camera.open(0);
 
+
+        //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频
         if (!camera.isOpened()) {
             System.err.println("打开视频流失败");
         }
