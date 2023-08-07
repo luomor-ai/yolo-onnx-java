@@ -75,7 +75,8 @@ public class CameraDetection {
         ODConfig odConfig = new ODConfig();
         VideoCapture camera = new VideoCapture();
 
-        // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test""),camera.open("rtsp://192.168.1.100/live/test"")
+        // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test"),camera.open("rtsp://192.168.1.100/live/test")
+        // 也可以静态视频文件：camera.open("c://abc/123.mp4")
         camera.open(0);
 
 
