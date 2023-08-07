@@ -79,7 +79,7 @@ public class CameraDetection {
         camera.open(0);
 
         if (!camera.isOpened()) {
-            System.err.println("摄像头打开失败");
+            System.err.println("打开视频流失败");
         }
 
 
