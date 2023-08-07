@@ -148,7 +148,7 @@ public class CameraDetection {
                 stringOnnxTensorHashMap.put(session.getInputInfo().keySet().iterator().next(), tensor);
 
                 // 运行推理
-                // 模型推理本质是矩阵运算，而GPU是专门用于矩阵运算，占用率低，如果使用cpu也可以运行，可能占用率100%属于正常现象，不必纠结。
+                // 模型推理本质是多维矩阵运算，而GPU是专门用于矩阵运算，占用率低，如果使用cpu也可以运行，可能占用率100%属于正常现象，不必纠结。
                 OrtSession.Result output = session.run(stringOnnxTensorHashMap);
 
                 // 得到结果,缓存结果
