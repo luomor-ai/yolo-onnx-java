@@ -94,6 +94,7 @@ public class CameraDetection {
 
         Mat img = new Mat();
 
+        // 跳帧检测，一般gpu设置为2，cpu设置为3
         int detect_skip = 3;
 
         // 跳帧计数
