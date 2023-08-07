@@ -108,7 +108,6 @@ public class CameraDetection {
 
         while (camera.read(img)) {
 
-
             if ((detect_skip_index % detect_skip == 0) || outputData == null){
                 detect_skip_index = 1;
 
@@ -125,6 +124,9 @@ public class CameraDetection {
                 int rows = letterbox.getHeight();
                 int cols = letterbox.getWidth();
                 int channels = image.channels();
+
+
+
 
                 // 将Mat对象的像素值赋值给Float[]对象
                 float[] pixels = new float[channels * rows * cols];
@@ -147,8 +149,7 @@ public class CameraDetection {
                 // 运行推理
                 OrtSession.Result output = session.run(stringOnnxTensorHashMap);
 
-
-                // 得到结果
+                // 得到结果,缓存结果
                 outputData = (float[][]) output.get(0).getValue();
             }else{
                 detect_skip_index = detect_skip_index + 1;
@@ -172,7 +173,6 @@ public class CameraDetection {
                 Imgproc.putText(img, boxName, boxNameLoc, fontFace, fontSize, color, thickness);
 
             }
-
 
             HighGui.imshow("result", img);
 
