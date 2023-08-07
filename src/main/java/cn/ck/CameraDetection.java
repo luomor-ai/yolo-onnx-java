@@ -76,7 +76,7 @@ public class CameraDetection {
         // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test"),
         // camera.open("rtsp://192.168.1.100/live/test")
         // 也可以静态视频文件：camera.open("c://abc/123.mp4")
-        camera.open("rtsp://admin:a123456789@192.168.1.154:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
+        camera.open(0);
 
 
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频
