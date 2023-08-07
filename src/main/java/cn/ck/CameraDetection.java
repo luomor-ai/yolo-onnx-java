@@ -93,7 +93,7 @@ public class CameraDetection {
 
         Mat img = new Mat();
 
-        // 跳帧检测，一般gpu设置为2，cpu设置为3，毫秒内画面变化是不大的，快了无意义，反而浪费性能
+        // 跳帧检测，一般gpu设置为2，cpu设置为3，毫秒内视频画面变化是不大的，快了无意义，反而浪费性能
         int detect_skip = 3;
 
         // 跳帧计数
