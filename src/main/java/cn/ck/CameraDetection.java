@@ -66,20 +66,20 @@ public class CameraDetection {
 
         // 加载标签及颜色
         ODConfig odConfig = new ODConfig();
-        VideoCapture camera = new VideoCapture();
+        VideoCapture video = new VideoCapture();
 
         // 也可以设置为rtmp或者rtsp视频流：camera.open("rtmp://192.168.1.100/live/test"), 海康，大华，录像机等等
         // camera.open("rtsp://192.168.1.100/live/test")
         // 也可以静态视频文件：camera.open("c://abc/123.mp4")  flv 等
-        camera.open(0);  //获取电脑上第0个摄像头
+        video.open(0);  //获取电脑上第0个摄像头
 
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频
-        if (!camera.isOpened()) {
-            System.err.println("打开视频流失败");
+        if (!video.isOpened()) {
+            System.err.println("打开视频流失败，请先用vlc软件测试链接是否可以播放！");
         }
 
         // 在这里先定义下框的粗细、字的大小、字的类型、字的颜色(按比例设置大小粗细比较好一些)
-        int minDwDh = Math.min((int)camera.get(Videoio.CAP_PROP_FRAME_WIDTH), (int)camera.get(Videoio.CAP_PROP_FRAME_HEIGHT));
+        int minDwDh = Math.min((int)video.get(Videoio.CAP_PROP_FRAME_WIDTH), (int)video.get(Videoio.CAP_PROP_FRAME_HEIGHT));
         int thickness = minDwDh / ODConfig.lineThicknessRatio;
         double fontSize = minDwDh / ODConfig.fontSizeRatio;
         int fontFace = Imgproc.FONT_HERSHEY_SIMPLEX;
@@ -102,7 +102,7 @@ public class CameraDetection {
         int cols = 0;
         int channels = 0;
 
-        while (camera.read(img)) {
+        while (video.read(img)) {
 
             if ((detect_skip_index % detect_skip == 0) || outputData == null){
                 detect_skip_index = 1;
@@ -178,7 +178,7 @@ public class CameraDetection {
         }
 
         HighGui.destroyAllWindows();
-        camera.release();
+        video.release();
         System.exit(0);
 
     }
