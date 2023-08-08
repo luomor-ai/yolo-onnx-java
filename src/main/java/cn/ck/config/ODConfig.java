@@ -11,7 +11,7 @@ public final class ODConfig {
 
 
     public static final Integer lineThicknessRatio = 333;
-    public static final Double fontSizeRatio = 1145.14;
+    public static final Double fontSizeRatio = 1080.0;
 
     private static final List<String> default_names = new ArrayList<>(Arrays.asList(
             "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train",

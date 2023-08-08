@@ -117,9 +117,9 @@ public class CameraDetection {
                 ratio = letterbox.getRatio();
                 dw = letterbox.getDw();
                 dh = letterbox.getDh();
-                rows = letterbox.getHeight();
-                cols = letterbox.getWidth();
-                channels = image.channels();
+                rows = letterbox.getHeight(); // 640
+                cols = letterbox.getWidth();  // 640
+                channels = image.channels();  // 3
 
                 // 将Mat对象的像素值赋值给Float[]对象
                 float[] pixels = new float[channels * rows * cols];
@@ -164,17 +164,16 @@ public class CameraDetection {
                 String boxName = labels[odResult.getClsId()];
                 Point boxNameLoc = new Point((odResult.getX0() - dw) / ratio, (odResult.getY0() - dh) / ratio - 3);
 
-                Imgproc.putText(img, boxName, boxNameLoc, fontFace, fontSize, color, thickness);
+                Imgproc.putText(img, boxName, boxNameLoc, fontFace, 0.7, color, thickness);
 
             }
 
             HighGui.imshow("result", img);
 
-            // 按任意按键关闭弹窗画面，结束程序
+            // 多次按任意按键关闭弹窗画面，结束程序
             if(HighGui.waitKey(1) != -1){
                 break;
             }
-
         }
 
         HighGui.destroyAllWindows();

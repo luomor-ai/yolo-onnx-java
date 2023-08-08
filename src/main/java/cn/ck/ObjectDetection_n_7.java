@@ -70,8 +70,6 @@ public class ObjectDetection_n_7 {
             // 在这里先定义下框的粗细、字的大小、字的类型、字的颜色(按比例设置大小粗细比较好一些)
             int minDwDh = Math.min(img.width(), img.height());
             int thickness = minDwDh/ODConfig.lineThicknessRatio;
-            double fontSize = minDwDh/ODConfig.fontSizeRatio;
-            int fontFace = Imgproc.FONT_HERSHEY_SIMPLEX;
 
             // 上面代码都是初始化后静态的，不用写在循环内，所以不计算时间
             long start_time = System.currentTimeMillis();
@@ -126,7 +124,7 @@ public class ObjectDetection_n_7 {
                 String boxName = odConfig.getName(odResult.getClsId());
                 Point boxNameLoc = new Point((odResult.getX0()-dw)/ratio, (odResult.getY0()-dh)/ratio-3);
 
-                Imgproc.putText(img, boxName, boxNameLoc, fontFace, fontSize, color, thickness);
+                Imgproc.putText(img, boxName, boxNameLoc, Imgproc.FONT_HERSHEY_SIMPLEX, 0.7, color, thickness);
             });
             System.out.printf("time：%d ms.", (System.currentTimeMillis() - start_time));
             System.out.println();
