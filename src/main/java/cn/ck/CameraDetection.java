@@ -98,9 +98,9 @@ public class CameraDetection {
         double ratio = 0.0d;
         double dw  = 0.0d;
         double dh = 0.0d;
-        int rows = 0;
-        int cols = 0;
-        int channels = 0;
+        int rows;
+        int cols ;
+        int channels ;
 
         while (video.read(img)) {
 
