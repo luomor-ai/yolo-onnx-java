@@ -42,5 +42,5 @@ Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一
 是一种针对机器学习所设计的开放式的文件格式，用于存储训练好的模型。它使得不同的人工智能框架（如Pytorch, MXNet）可以采用相同格式存储模型数据并交互。 ONNX的规范及代码主要由微软，亚马逊 ，Facebook 和 IBM 等公司共同开发，以开放源代码的方式托管在Github.
 
 ## 效果预览
-![输入图片说明](https://gitee.com/agricultureiot/python-screen/raw/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230809142533.png)
+![输入图片说明](https://foruda.gitee.com/images/1691564940451414777/1d31975d_1451768.png)
 
