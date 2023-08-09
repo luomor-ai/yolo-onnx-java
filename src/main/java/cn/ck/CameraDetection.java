@@ -165,6 +165,7 @@ public class CameraDetection {
                 String boxName = labels[odResult.getClsId()];
                 Point boxNameLoc = new Point((odResult.getX0() - dw) / ratio, (odResult.getY0() - dh) / ratio - 3);
 
+                // 也可以二次往视频画面上叠加其他文字或者数据，比如物联网设备数据等等
                 Imgproc.putText(img, boxName, boxNameLoc, fontFace, 0.7, color, thickness);
 
             }
