@@ -71,6 +71,7 @@ public class CameraDetection {
         // 也可以设置为rtmp或者rtsp视频流：video.open("rtmp://192.168.1.100/live/test"), 海康，大华，录像机等等
         // video.open("rtsp://192.168.1.100/live/test")
         // 也可以静态视频文件：video.open("c://abc/123.mp4")  flv 等
+        // 不持支h265视频编码，如果无法播放或者程序卡住，请修改视频编码格式
         video.open(0);  //获取电脑上第0个摄像头
 
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频，需要使用ffmpeg将连续图片合成flv 等等，很简单。
