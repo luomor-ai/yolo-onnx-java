@@ -28,9 +28,9 @@ import java.util.stream.Collectors;
 public class ObjectDetection_1_25200_n {
 
     static {
-        // 加载opencv动态库，仅能在windows中运行，如果在linux中运行，需要加载linux动态库
-        URL url = ClassLoader.getSystemResource("lib/opencv_java460.dll");
-        System.load(url.getPath());
+        // 加载opencv动态库，
+        //System.load(ClassLoader.getSystemResource("lib/opencv_java460.dll").getPath());
+        nu.pattern.OpenCV.loadLocally();
     }
 
     public static void main(String[] args) throws OrtException {
@@ -74,7 +74,6 @@ public class ObjectDetection_1_25200_n {
             Mat img = Imgcodecs.imread(imageFilePath);
             Mat image = img.clone();
             Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
-
 
 
            // img.convertTo(img, CvType.CV_32FC1, 1. / 255);
@@ -148,7 +147,7 @@ public class ObjectDetection_1_25200_n {
                 bboxes = nonMaxSuppression(bboxes, nmsThreshold);
                 for (float[] bbox : bboxes) {
                     String labelString = labels[entry.getKey()];
-                    detections.add(new Detection(labelString, Arrays.copyOfRange(bbox, 0, 4), bbox[4]));
+                    detections.add(new Detection(labelString,entry.getKey(), Arrays.copyOfRange(bbox, 0, 4), bbox[4]));
                 }
             }
 
@@ -158,7 +157,7 @@ public class ObjectDetection_1_25200_n {
                 // 画框
                 Point topLeft = new Point((bbox[0]-dw)/ratio, (bbox[1]-dh)/ratio);
                 Point bottomRight = new Point((bbox[2]-dw)/ratio, (bbox[3]-dh)/ratio);
-                Scalar color = new Scalar(odConfig.getColor(1));
+                Scalar color = new Scalar(odConfig.getOtherColor(detection.getClsId()));
                 Imgproc.rectangle(img, topLeft, bottomRight, color, thickness);
                 // 框上写文字
                 Point boxNameLoc = new Point((bbox[0]-dw)/ratio, (bbox[1]-dh)/ratio-3);
@@ -181,8 +180,6 @@ public class ObjectDetection_1_25200_n {
 
     }
 
-
-
     public static void scaleCoords(float[] bbox, float orgW, float orgH, float padW, float padH, float gain) {
         // xmin, ymin, xmax, ymax -> (xmin_org, ymin_org, xmax_org, ymax_org)
         bbox[0] = Math.max(0, Math.min(orgW - 1, (bbox[0] - padW) / gain));
@@ -204,12 +201,9 @@ public class ObjectDetection_1_25200_n {
 
     public static List<float[]> nonMaxSuppression(List<float[]> bboxes, float iouThreshold) {
 
-
         List<float[]> bestBboxes = new ArrayList<>();
 
-
         bboxes.sort(Comparator.comparing(a -> a[4]));
-
 
         while (!bboxes.isEmpty()) {
             float[] bestBbox = bboxes.remove(bboxes.size() - 1);

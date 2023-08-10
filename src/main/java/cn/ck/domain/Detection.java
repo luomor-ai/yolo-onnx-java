@@ -4,13 +4,15 @@ public class Detection{
 
     public String label;
 
+    private Integer clsId;
+
     public float[] bbox;
 
     public float confidence;
 
 
-    public Detection(String label, float[] bbox, float confidence){
-
+    public Detection(String label,Integer clsId, float[] bbox, float confidence){
+        this.clsId = clsId;
         this.label = label;
         this.bbox = bbox;
         this.confidence = confidence;
@@ -18,6 +20,14 @@ public class Detection{
 
     public Detection(){
 
+    }
+
+    public Integer getClsId() {
+        return clsId;
+    }
+
+    public void setClsId(Integer clsId) {
+        this.clsId = clsId;
     }
 
     public String getLabel() {
@@ -39,6 +49,7 @@ public class Detection{
     @Override
     public String toString() {
         return "  label="+label +
+                " \t clsId="+clsId +
                 " \t x0="+bbox[0] +
                 " \t y0="+bbox[1] +
                 " \t x1="+bbox[2] +

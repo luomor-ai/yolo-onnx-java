@@ -50,6 +50,9 @@ public final class ODConfig {
         return colors.get(getName(clsId));
     }
 
+    public double[] getNameColor(String Name){
+        return colors.get(Name);
+    }
 
     public double[] getOtherColor(int clsId) {
         return colors.get(default_names.get(clsId));

@@ -25,9 +25,14 @@ import java.util.HashMap;
 public class CameraDetection {
 
 
+
+
     public static void main(String[] args) throws OrtException {
 
-        System.load(ClassLoader.getSystemResource("lib/opencv_java460.dll").getPath());
+        //System.load(ClassLoader.getSystemResource("lib/opencv_java460.dll").getPath());
+        nu.pattern.OpenCV.loadLocally();
+
+        //linux和苹果系统需要注释这一行，如果仅打开摄像头预览，这一行没有用，可以删除，如果rtmp或者rtsp等等这一样有用，也可以用pom依赖代替
         System.load(ClassLoader.getSystemResource("lib/opencv_videoio_ffmpeg460_64.dll").getPath());
 
         String model_path = "src\\main\\resources\\model\\yolov7-tiny.onnx";
@@ -96,46 +101,36 @@ public class CameraDetection {
          // 最新一帧也就是上一帧推理结果
         float[][] outputData   = null;
 
-        double ratio = 0.0d;
-        double dw  = 0.0d;
-        double dh = 0.0d;
-        int rows;
-        int cols ;
-        int channels ;
+        //当前最新一帧。上一帧也可以暂存一下
+        Mat image;
 
+        Letterbox letterbox = new Letterbox();
+
+        // 使用多线程可以提升帧率，一个线程拉流，一个线程模型推理，中间通过变量或者队列交换数据,代码示例仅仅使用单线程
         while (video.read(img)) {
-
+            image = img.clone();
             if ((detect_skip_index % detect_skip == 0) || outputData == null){
                 detect_skip_index = 1;
 
-                Mat image = img.clone();
                 Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
 
-                // 更改 image 尺寸
-                Letterbox letterbox = new Letterbox();
+                // 缩放 image 尺寸
                 image = letterbox.letterbox(image);
 
-                ratio = letterbox.getRatio();
-                dw = letterbox.getDw();
-                dh = letterbox.getDh();
-                rows = letterbox.getHeight(); // 640
-                cols = letterbox.getWidth();  // 640
-                channels = image.channels();  // 3
-
                 // 将Mat对象的像素值赋值给Float[]对象
-                float[] pixels = new float[channels * rows * cols];
-                for (int i = 0; i < rows; i++) {
-                    for (int j = 0; j < cols; j++) {
+                float[] pixels = new float[image.channels() * letterbox.getHeight() * letterbox.getWidth()];
+                for (int i = 0; i < letterbox.getHeight(); i++) {
+                    for (int j = 0; j < letterbox.getWidth(); j++) {
                         double[] pixel = image.get(j, i);
-                        for (int k = 0; k < channels; k++) {
+                        for (int k = 0; k < image.channels(); k++) {
                             // 这样设置相当于同时做了image.transpose((2, 0, 1))操作
-                            pixels[rows * cols * k + j * cols + i] = (float) pixel[k] / 255.0f;
+                            pixels[letterbox.getHeight() * letterbox.getWidth() * k + j * letterbox.getWidth() + i] = (float) pixel[k] / 255.0f;
                         }
                     }
                 }
 
                 // 创建OnnxTensor对象
-                long[] shape = {1L, (long) channels, (long) rows, (long) cols};
+                long[] shape = {1L, (long) image.channels(), (long) letterbox.getHeight(), (long) letterbox.getWidth()};
                 OnnxTensor tensor = OnnxTensor.createTensor(environment, FloatBuffer.wrap(pixels), shape);
                 HashMap<String, OnnxTensor> stringOnnxTensorHashMap = new HashMap<>();
                 stringOnnxTensorHashMap.put(session.getInputInfo().keySet().iterator().next(), tensor);
@@ -153,23 +148,22 @@ public class CameraDetection {
             for(float[] x : outputData){
 
                 ODResult odResult = new ODResult(x);
-                System.out.println(odResult);
 
                 // 画框
-                Point topLeft = new Point((odResult.getX0() - dw) / ratio, (odResult.getY0() - dh) / ratio);
-                Point bottomRight = new Point((odResult.getX1() - dw) / ratio, (odResult.getY1() - dh) / ratio);
+                Point topLeft = new Point((odResult.getX0() - letterbox.getDw()) / letterbox.getRatio(), (odResult.getY0() - letterbox.getDh()) / letterbox.getRatio());
+                Point bottomRight = new Point((odResult.getX1() - letterbox.getDw()) / letterbox.getRatio(), (odResult.getY1() - letterbox.getDh()) / letterbox.getRatio());
                 Scalar color = new Scalar(odConfig.getOtherColor(odResult.getClsId()));
 
                 Imgproc.rectangle(img, topLeft, bottomRight, color, thickness);
                 // 框上写文字
                 String boxName = labels[odResult.getClsId()];
-                Point boxNameLoc = new Point((odResult.getX0() - dw) / ratio, (odResult.getY0() - dh) / ratio - 3);
+                Point boxNameLoc = new Point((odResult.getX0() - letterbox.getDw()) / letterbox.getRatio(), (odResult.getY0() - letterbox.getDh()) / letterbox.getRatio() - 3);
 
                 // 也可以二次往视频画面上叠加其他文字或者数据，比如物联网设备数据等等
                 Imgproc.putText(img, boxName, boxNameLoc, fontFace, 0.7, color, thickness);
+                System.out.println(odResult+"   "+ boxName);
 
             }
-
             HighGui.imshow("result", img);
 
             // 多次按任意按键关闭弹窗画面，结束程序
@@ -184,3 +178,5 @@ public class CameraDetection {
 
     }
 }
+
+

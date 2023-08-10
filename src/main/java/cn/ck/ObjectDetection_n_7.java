@@ -24,9 +24,9 @@ import java.util.*;
 public class ObjectDetection_n_7 {
 
     static {
-        // 加载opencv动态库，仅能在windows中运行，如果在linux中运行，需要加载linux动态库
-        URL url = ClassLoader.getSystemResource("lib/opencv_java460.dll");
-        System.load(url.getPath());
+        // 加载opencv动态库
+        //System.load(ClassLoader.getSystemResource("lib/opencv_java460.dll").getPath());
+        nu.pattern.OpenCV.loadLocally();
     }
 
     public static void main(String[] args) throws OrtException {
@@ -112,12 +112,11 @@ public class ObjectDetection_n_7 {
             Arrays.stream(outputData).iterator().forEachRemaining(x->{
 
                 ODResult odResult = new ODResult(x);
-                System.out.println(odResult);
 
                 // 画框
                 Point topLeft = new Point((odResult.getX0()-dw)/ratio, (odResult.getY0()-dh)/ratio);
                 Point bottomRight = new Point((odResult.getX1()-dw)/ratio, (odResult.getY1()-dh)/ratio);
-                Scalar color = new Scalar(odConfig.getColor(odResult.getClsId()));
+                Scalar color = new Scalar(odConfig.getOtherColor(odResult.getClsId()));
 
                 Imgproc.rectangle(img, topLeft, bottomRight, color, thickness);
                 // 框上写文字
@@ -125,6 +124,7 @@ public class ObjectDetection_n_7 {
                 Point boxNameLoc = new Point((odResult.getX0()-dw)/ratio, (odResult.getY0()-dh)/ratio-3);
 
                 Imgproc.putText(img, boxName, boxNameLoc, Imgproc.FONT_HERSHEY_SIMPLEX, 0.7, color, thickness);
+                System.out.println(odResult+"   "+ boxName);
             });
             System.out.printf("time：%d ms.", (System.currentTimeMillis() - start_time));
             System.out.println();
