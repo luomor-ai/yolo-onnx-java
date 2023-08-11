@@ -133,6 +133,7 @@ public class ObjectDetection_n_7 {
             // Imgcodecs.imwrite(ODConfig.savePicPath, img);
             // 弹窗展示图像
 
+            //服务器部署：由于服务器没有桌面，所以无法弹出画面预览，主要注释一下代码
             HighGui.imshow("result", img);
 
             // 按任意按键关闭弹窗画面，结束程序

@@ -151,6 +151,7 @@ public class ObjectDetection_1_25200_n {
                 }
             }
 
+
             for (Detection detection : detections) {
                 float[] bbox = detection.getBbox();
                 System.out.println(detection.toString());
@@ -167,6 +168,7 @@ public class ObjectDetection_1_25200_n {
             System.out.printf("time：%d ms.", (System.currentTimeMillis() - start_time));
 
             System.out.println();
+            //服务器部署：由于服务器没有桌面，所以无法弹出画面预览，主要注释一下代码
 
             // 保存图像到同级目录
             // Imgcodecs.imwrite(ODConfig.savePicPath, img);

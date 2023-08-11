@@ -164,6 +164,7 @@ public class CameraDetection {
                 System.out.println(odResult+"   "+ boxName);
 
             }
+            //服务器部署：由于服务器没有桌面，所以无法弹出画面预览，主要注释一下代码
             HighGui.imshow("result", img);
 
             // 多次按任意按键关闭弹窗画面，结束程序
