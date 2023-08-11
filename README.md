@@ -33,7 +33,9 @@
 ![输入图片说明](https://foruda.gitee.com/images/1690944320288742664/eb1cb2d9_1451768.png "屏幕截图")
 
 ## 暂不直接支持输出结果是三个数组参数的以下模型
-- 但是这种结构模型可以转为[1,25200,85]输出结构，然后就可以使用ObjectDetection_1_25200_n.java
+- 但是这种结构模型可以导出为`[1,25200,85]`输出结构，然后就可以使用`ObjectDetection_1_25200_n.java`
+- yolov5：导出onnx时增加参数  `inplace=True,simplify=True`
+- yolov7：导出onnx时增加参数  `grid=True,simplify=True` 或者 `grid=True,simplify=True,end2end=True,include-nms=True`
 ![输入图片说明](https://foruda.gitee.com/images/1691765789379434579/3c314f1c_1451768.png "屏幕截图")
 ![输入图片说明](https://foruda.gitee.com/images/1691766358544706096/1136ee49_1451768.png "屏幕截图")
 
