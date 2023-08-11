@@ -94,7 +94,7 @@ public class CameraDetection {
 
         Mat img = new Mat();
 
-        // 跳帧检测，一般gpu设置为2，cpu设置为3，毫秒内视频画面变化是不大的，快了无意义，反而浪费性能
+        // 跳帧检测，一般设置为3，毫秒内视频画面变化是不大的，快了无意义，反而浪费性能
         int detect_skip = 3;
 
         // 跳帧计数
@@ -107,13 +107,11 @@ public class CameraDetection {
         Mat image;
 
         Letterbox letterbox = new Letterbox();
-
         // 使用多线程和GPU可以提升帧率，一个线程拉流，一个线程模型推理，中间通过变量或者队列交换数据,代码示例仅仅使用单线程
         while (video.read(img)) {
-            image = img.clone();
             if ((detect_skip_index % detect_skip == 0) || outputData == null){
                 detect_skip_index = 1;
-
+                image = img.clone();
                 Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
 
                 // 缩放 image 尺寸
