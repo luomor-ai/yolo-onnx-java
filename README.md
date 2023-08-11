@@ -32,9 +32,10 @@
  - 模型来源框架：yolov7
 ![输入图片说明](https://foruda.gitee.com/images/1690944320288742664/eb1cb2d9_1451768.png "屏幕截图")
 
-## 暂不直接支持输出结果是三个数组参数的模型
+## 暂不直接支持输出结果是三个数组参数的以下模型
 - 但是这种结构模型可以转为[1,25200,85]输出结构，然后就可以使用ObjectDetection_1_25200_n.java
 ![输入图片说明](https://foruda.gitee.com/images/1691765789379434579/3c314f1c_1451768.png "屏幕截图")
+![输入图片说明](https://foruda.gitee.com/images/1691766358544706096/1136ee49_1451768.png "屏幕截图")
 
 ## ONNX
 Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一个用于表示深度学习模型的标准，可使模型在不同框架之间进行转移.
