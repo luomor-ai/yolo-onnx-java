@@ -232,6 +232,7 @@ public class ObjectDetection_1_25200_n {
 
     }
 
+    //返回最大值的索引
     public static int argmax(float[] a) {
         float re = -Float.MAX_VALUE;
         int arg = -1;
