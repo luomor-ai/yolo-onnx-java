@@ -33,8 +33,10 @@ public class CameraDetection {
         nu.pattern.OpenCV.loadLocally();
 
         //linux和苹果系统需要注释这一行，如果仅打开摄像头预览，这一行没有用，可以删除，如果rtmp或者rtsp等等这一样有用，也可以用pom依赖代替
-        System.load(ClassLoader.getSystemResource("lib/opencv_videoio_ffmpeg460_64.dll").getPath());
-
+        String OS = System.getProperty("os.name").toLowerCase();
+        if (OS.contains("win")) {
+            System.load(ClassLoader.getSystemResource("lib/opencv_videoio_ffmpeg460_64.dll").getPath());
+        }
         String model_path = "src\\main\\resources\\model\\yolov7-tiny.onnx";
 
         String[] labels = {
@@ -106,7 +108,7 @@ public class CameraDetection {
 
         Letterbox letterbox = new Letterbox();
 
-        // 使用多线程可以提升帧率，一个线程拉流，一个线程模型推理，中间通过变量或者队列交换数据,代码示例仅仅使用单线程
+        // 使用多线程和GPU可以提升帧率，一个线程拉流，一个线程模型推理，中间通过变量或者队列交换数据,代码示例仅仅使用单线程
         while (video.read(img)) {
             image = img.clone();
             if ((detect_skip_index % detect_skip == 0) || outputData == null){
