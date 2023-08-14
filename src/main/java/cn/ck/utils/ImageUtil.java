@@ -68,6 +68,27 @@ public class ImageUtil {
         }
     }
 
+
+    public void xywh2xyxy(float[] bbox) {
+        float x = bbox[0];
+        float y = bbox[1];
+        float w = bbox[2];
+        float h = bbox[3];
+
+        bbox[0] = x - w * 0.5f;
+        bbox[1] = y - h * 0.5f;
+        bbox[2] = x + w * 0.5f;
+        bbox[3] = y + h * 0.5f;
+    }
+
+    public void scaleCoords(float[] bbox, float orgW, float orgH, float padW, float padH, float gain) {
+        // xmin, ymin, xmax, ymax -> (xmin_org, ymin_org, xmax_org, ymax_org)
+        bbox[0] = Math.max(0, Math.min(orgW - 1, (bbox[0] - padW) / gain));
+        bbox[1] = Math.max(0, Math.min(orgH - 1, (bbox[1] - padH) / gain));
+        bbox[2] = Math.max(0, Math.min(orgW - 1, (bbox[2] - padW) / gain));
+        bbox[3] = Math.max(0, Math.min(orgH - 1, (bbox[3] - padH) / gain));
+    }
+
     public static float[] whc2cwh(float[] src) {
         float[] chw = new float[src.length];
         int j = 0;
