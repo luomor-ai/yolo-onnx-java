@@ -35,6 +35,7 @@
 
 ## ObjectDetection_1_n_8400.java
  - yolov8
+
 ![输入图片说明](https://foruda.gitee.com/images/1691997101180269750/2388671b_1451768.png "屏幕截图")
 
 
