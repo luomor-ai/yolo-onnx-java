@@ -46,8 +46,9 @@ Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一
 ![输入图片说明](https://foruda.gitee.com/images/1691564940451414777/1d31975d_1451768.png)
 
 ## 参考链接
-https://blog.csdn.net/changzengli/article/details/129182528
-https://blog.csdn.net/xqtt29/article/details/110918397
-https://blog.csdn.net/changzengli/article/details/127904594
+- https://blog.csdn.net/changzengli/article/details/129182528
+- https://blog.csdn.net/xqtt29/article/details/110918397
+- https://blog.csdn.net/changzengli/article/details/127904594
+- 使用封装后的javacpp中的javacv 和 ffmpeg 也可以
 
 
