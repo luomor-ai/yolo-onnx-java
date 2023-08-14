@@ -13,7 +13,7 @@
 2.  `CameraDetection.java`，是实时视频流识别检测，也可直接运行（ **仅支持有摄像头的电脑或笔记本** ），三个文件完全独立，不互相依赖，如果有GPU帧率会更高，需要开启调用GPU
 3.  两个可以运行的主文件是为了支持不用网络结构的模型，即使是`onnx`模型，输出的结果参数也不一样，支持以下两种结构
 4.  可以封装为`http` `controller` `api`接口，也可以结合摄像头实时分析视频流，进行识别后预览和告警
-5.  支持`yolov7` 和 `yolov5`，`paddlepaddle`后处理稍微改一下也可以支持, **代码中自带的onnx模型仅仅为了演示，准确率非常低，实际应用需要自己训练** 
+5.  支持`yolov7` , `yolov5`和`yolov8`，`paddlepaddle`后处理稍微改一下也可以支持, **代码中自带的onnx模型仅仅为了演示，准确率非常低，实际应用需要自己训练** 
 6.  替换`model`目录下的onnx模型文件，可以识别检测任何物体(烟火，跌倒，抽烟，安全帽，口罩，人，打架，计数，攀爬，垃圾，开关，状态，分类，等等)，有模型即可
 7.  模型不是onnx格式怎么办？不要紧张，主流模型都可以转为onnx格式。怎么转？看完文档就知道了！
 ---
@@ -31,12 +31,15 @@
  - **7**：表示每个目标的七个参数：`batch_id，x0，y0，x1，y1，cls_id，score`
 ![输入图片说明](https://foruda.gitee.com/images/1690944320288742664/eb1cb2d9_1451768.png "屏幕截图")
 
+---
 ## 暂不直接支持输出结果是三个数组参数的以下模型
 - 但是这种结构模型可以导出为`[1,25200,85]`或`[n,7]`输出结构，然后就可以使用已有代码调用。
 -  **yolov5** ：导出onnx时增加参数  `inplace=True,simplify=True`(ObjectDetection_1_25200_n.java)
 -  **yolov7** ：导出onnx时增加参数  `grid=True,simplify=True`(ObjectDetection_1_25200_n.java) 或者 `grid=True,simplify=True,end2end=True,include-nms=True`(ObjectDetection_n_7.java)
 ![输入图片说明](https://foruda.gitee.com/images/1691765789379434579/3c314f1c_1451768.png "屏幕截图")
 ![输入图片说明](https://foruda.gitee.com/images/1691766358544706096/1136ee49_1451768.png "屏幕截图")
+
+---
 
 ## ONNX
 Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一个用于表示深度学习模型的标准，可使模型在不同框架之间进行转移.
