@@ -9,7 +9,7 @@
 ---
 
 ## 紧接着下载运行看效果再研究代码，别忘记点star
-1.  下载代码可直接运行主文件：`ObjectDetection_1_25200_n.java` 或者 `ObjectDetection_n_7.java` 都 **可以直接运行不会报错** 
+1.  下载代码可直接运行主文件：`ObjectDetection_1_25200_n.java` 或者 `ObjectDetection_n_7.java`,`ObjectDetection_1_n_8400.java` 都 **可以直接运行不会报错** 
 2.  `CameraDetection.java`，是实时视频流识别检测，也可直接运行（ **仅支持有摄像头的电脑或笔记本** ），三个文件完全独立，不互相依赖，如果有GPU帧率会更高，需要开启调用GPU
 3.  两个可以运行的主文件是为了支持不用网络结构的模型，即使是`onnx`模型，输出的结果参数也不一样，支持以下两种结构
 4.  可以封装为`http` `controller` `api`接口，也可以结合摄像头实时分析视频流，进行识别后预览和告警
@@ -30,6 +30,13 @@
  - **Concatoutput_dim_0** ：变量，表示当前图像中预测目标的数量，
  - **7**：表示每个目标的七个参数：`batch_id，x0，y0，x1，y1，cls_id，score`
 ![输入图片说明](https://foruda.gitee.com/images/1690944320288742664/eb1cb2d9_1451768.png "屏幕截图")
+
+---
+
+## ObjectDetection_1_n_8400.java
+ - yolov8
+![输入图片说明](https://foruda.gitee.com/images/1691997101180269750/2388671b_1451768.png "屏幕截图")
+
 
 ---
 ## 暂不直接支持输出结果是三个数组参数的以下模型
