@@ -7,11 +7,7 @@ import ai.onnxruntime.OrtSession;
 import cn.ck.config.ODConfig;
 import cn.ck.domain.ODResult;
 import cn.ck.utils.ImageUtil;
-import cn.ck.utils.Letterbox;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
+import org.opencv.core.*;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
@@ -19,18 +15,9 @@ import org.opencv.videoio.Videoio;
 
 import java.nio.FloatBuffer;
 import java.util.HashMap;
+public class Tracking {
 
-/**
- * 摄像头识别，仅支持运行在有摄像头的电脑上
- */
-
-public class CameraDetection {
-
-
-
-
-    public static void main(String[] args) throws OrtException {
-
+    public static void main(String[] args) throws OrtException{
         //System.load(ClassLoader.getSystemResource("lib/opencv_java460.dll").getPath());
         nu.pattern.OpenCV.loadLocally();
 
@@ -102,13 +89,13 @@ public class CameraDetection {
         // 跳帧计数
         int detect_skip_index = 1;
 
-         // 最新一帧也就是上一帧推理结果
+        // 最新一帧也就是上一帧推理结果
         float[][] outputData   = null;
 
         //当前最新一帧。上一帧也可以暂存一下
         Mat image;
 
-        Letterbox letterbox = new Letterbox();
+        VideoLetterbox letterbox = new VideoLetterbox();
         OnnxTensor tensor;
         // 使用多线程和GPU可以提升帧率，一个线程拉流，一个线程模型推理，中间通过变量或者队列交换数据,代码示例仅仅使用单线程
         while (video.read(img)) {
@@ -127,6 +114,7 @@ public class CameraDetection {
 
                 FloatBuffer inputBuffer = FloatBuffer.wrap(chw);
                 tensor = OnnxTensor.createTensor(environment, inputBuffer, new long[]{1, 3, 640, 640});
+
 
                 HashMap<String, OnnxTensor> stringOnnxTensorHashMap = new HashMap<>();
                 stringOnnxTensorHashMap.put(session.getInputInfo().keySet().iterator().next(), tensor);
@@ -173,8 +161,85 @@ public class CameraDetection {
         HighGui.destroyAllWindows();
         video.release();
         System.exit(0);
-
     }
+
+
 }
 
+class VideoLetterbox {
 
+    private Size newShape = new Size(640, 640);
+    private final double[] color = new double[]{114,114,114};
+    private final Boolean auto = false;
+    private final Boolean scaleUp = true;
+    private Integer stride = 32;
+
+    private double ratio;
+    private double dw;
+    private double dh;
+
+    public double getRatio() {
+        return ratio;
+    }
+
+    public double getDw() {
+        return dw;
+    }
+
+    public Integer getWidth() {
+        return (int) this.newShape.width;
+    }
+
+    public Integer getHeight() {
+        return (int) this.newShape.height;
+    }
+
+    public double getDh() {
+        return dh;
+    }
+
+
+     Size newUnpad;
+     int top;
+     int bottom;
+     int left;
+     int right;
+
+    public Mat letterbox(Mat im) { // 调整图像大小和填充图像，使满足步长约束，并记录参数
+
+        // Compute padding
+        if(newUnpad == null){
+            int[] shape = {im.rows(), im.cols()}; // 当前形状 [height, width]
+            // Scale ratio (new / old)
+            double r = Math.min(this.newShape.height / shape[0], this.newShape.width / shape[1]);
+            if (!this.scaleUp) { // 仅缩小，不扩大（一且为了mAP）
+                r = Math.min(r, 1.0);
+            }
+            this.ratio = r;
+            newUnpad = new Size(Math.round(shape[1] * r), Math.round(shape[0] * r));
+            double dw = this.newShape.width - newUnpad.width, dh = this.newShape.height - newUnpad.height; // wh 填充
+            if (this.auto) { // 最小矩形
+                dw = dw % this.stride;
+                dh = dh % this.stride;
+            }
+            dw /= 2; // 填充的时候两边都填充一半，使图像居于中心
+            dh /= 2;
+            if (shape[1] != newUnpad.width || shape[0] != newUnpad.height) { // resize
+                Imgproc.resize(im, im, newUnpad, 0, 0, Imgproc.INTER_LINEAR);
+            }
+             top = (int) Math.round(dh - 0.1);
+             bottom = (int) Math.round(dh + 0.1);
+             left = (int) Math.round(dw - 0.1);
+             right = (int) Math.round(dw + 0.1);
+            // 将图像填充为正方形
+            Core.copyMakeBorder(im, im, top, bottom, left, right, Core.BORDER_CONSTANT, new org.opencv.core.Scalar(this.color));
+
+            this.dh = dh;
+            this.dw = dw;
+        }else{
+            Imgproc.resize(im, im, newUnpad, 0, 0, Imgproc.INTER_LINEAR);
+            Core.copyMakeBorder(im, im, top, bottom, left, right, Core.BORDER_CONSTANT, new org.opencv.core.Scalar(this.color));
+        }
+        return im;
+    }
+}
