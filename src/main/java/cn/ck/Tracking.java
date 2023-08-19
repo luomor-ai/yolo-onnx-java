@@ -99,7 +99,6 @@ public class Tracking {
         OnnxTensor tensor;
         // 使用多线程和GPU可以提升帧率，一个线程拉流，一个线程模型推理，中间通过变量或者队列交换数据,代码示例仅仅使用单线程
         while (video.read(img)) {
-            long start_time = System.currentTimeMillis();
             if ((detect_skip_index % detect_skip == 0) || outputData == null){
                 image = img.clone();
                 image = letterbox.letterbox(image);
@@ -148,7 +147,6 @@ public class Tracking {
                 System.out.println(odResult+"   "+ boxName);
 
             }
-            System.out.printf("time：%d ms.", (System.currentTimeMillis() - start_time));
             //服务器部署：由于服务器没有桌面，所以无法弹出画面预览，主要注释一下代码
             HighGui.imshow("result", img);
 
