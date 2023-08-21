@@ -143,6 +143,7 @@ public class CameraDetection {
             for(float[] x : outputData){
 
                 ODResult odResult = new ODResult(x);
+                // 业务逻辑写在这里，注释下面代码，增加自己的代码，根据返回识别到的目标类型，编写告警逻辑。等等
 
                 // 画框
                 Point topLeft = new Point((odResult.getX0() - letterbox.getDw()) / letterbox.getRatio(), (odResult.getY0() - letterbox.getDh()) / letterbox.getRatio());
