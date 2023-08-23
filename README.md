@@ -57,7 +57,7 @@ Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一
 ## 效果预览
 ![输入图片说明](https://foruda.gitee.com/images/1691564940451414777/1d31975d_1451768.png)
 
-### 问题咨询(备注：onnx)
+### 扫码拉入群(备注：onnx)
 ![输入图片说明](https://foruda.gitee.com/images/1692414289523254420/c430b1ce_1451768.jpeg "微信图片_20230819110428.jpg")
 
 ## 有用链接
