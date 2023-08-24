@@ -20,7 +20,7 @@
         <version>1.15.1</version>
     </dependency>
 
-<!--        <dependency>
+<!--        <dependency> 切换gpu后一定要maven update,否则会报错
             <groupId>com.microsoft.onnxruntime</groupId>
             <artifactId>onnxruntime_gpu</artifactId>
             <version>1.14.0</version>
