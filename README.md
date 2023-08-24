@@ -67,6 +67,6 @@ Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一
 - 使用封装后的javacpp中的javacv 和 ffmpeg 也可以
 
 ## 使用GPU前提
-- 安装对应版本的：cuda 和 cudnn
-- 并测试是否安装成功
+- 安装对应版本的：cuda 和 cudnn，版本需要和自己电脑上的GPU型号对应，和项目无关
+- 并测试是否安装成功，一定要测试
 
