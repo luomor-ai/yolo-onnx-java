@@ -44,7 +44,7 @@
 ## 暂不直接支持输出结果是三个数组参数的以下模型
 - 但是这种结构模型可以导出为`[1,25200,85]`或`[n,7]`输出结构，然后就可以使用已有代码调用。
 -  **yolov5** ：导出onnx时增加参数  `inplace=True,simplify=True`(ObjectDetection_1_25200_n.java)
--  **yolov7** ：导出onnx时增加参数  `grid=True,simplify=True`(ObjectDetection_1_25200_n.java) 或者 `grid=True,simplify=True,end2end=True,include-nms=True`(ObjectDetection_n_7.java)
+-  **yolov7** ：导出onnx时增加参数  `grid=True,simplify=True`(ObjectDetection_1_25200_n.java) 或者 `grid=True,simplify=True,end2end=True`(ObjectDetection_n_7.java)
 ![输入图片说明](https://foruda.gitee.com/images/1691765789379434579/3c314f1c_1451768.png "屏幕截图")
 ![输入图片说明](https://foruda.gitee.com/images/1691766358544706096/1136ee49_1451768.png "屏幕截图")
 
