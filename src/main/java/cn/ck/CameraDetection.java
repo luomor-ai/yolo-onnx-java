@@ -61,6 +61,7 @@ public class CameraDetection {
 
         // 使用gpu,需要本机按钻过cuda，并修改pom.xml，不安装也能运行本程序
         // sessionOptions.addCUDA(0);
+        // 实际项目中，视频识别必须开启GPU，并且要防止队列堆积
 
         OrtSession session = environment.createSession(model_path, sessionOptions);
         // 输出基本信息
