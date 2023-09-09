@@ -83,6 +83,7 @@ public class CameraDetection {
         // 也可以静态视频文件：video.open("c://abc/123.mp4")  flv 等
         // 不持支h265视频编码，如果无法播放或者程序卡住，请修改视频编码格式
         video.open(0);  //获取电脑上第0个摄像头
+        //video.open("images/car2.mp4"); //不开启gpu比较卡
 
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频，需要使用ffmpeg将连续图片合成flv 等等，很简单。
         if (!video.isOpened()) {
