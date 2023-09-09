@@ -68,8 +68,7 @@ Open Neural Network Exchange（ONNX，开放神经网络交换）格式，是一
 - https://blog.csdn.net/changzengli/article/details/129661570
 
 ## 扫码加群
-- 提前说好：代码免费，解答和解决问题免费，学习资料免费，群里交流免费，如果让我教学怎么训练模型收费
-- 进群2小时内发运行代码截图，不然踢出群
+- 进群2小时内发运行代码截图，不然踢出群,真踢
 ![输入图片说明](https://foruda.gitee.com/images/1694145359039431785/ba582dfe_1451768.jpeg "微信图片_20230908115544.jpg")
 
 ## 有用链接
